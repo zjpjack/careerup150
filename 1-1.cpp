@@ -27,6 +27,20 @@ class Solution{
       }
       return true;
     }
+    /**
+     * Follow the idea on cc150, use one checker as bitmap to reduce the space complexity.
+     * Assumption: the string only has capital letter.
+     **/
+    bool isunique3(string str) {
+      int checker = 0;
+      for (int i = 0; i < str.size(); i++) {
+        int shift = str[i] - 'A';
+        if (checker & (1 << shift) > 0) return false;
+        checker |= 1 << shift;
+      }
+      return false;
+    }
+
 };
 
 int main(){
@@ -37,5 +51,7 @@ int main(){
   sol.isunique1(str) ? (cout << "true" << endl) : (cout << "false" << endl);
   cout << str<< ": ";
   sol.isunique2(str) ? (cout << "true" << endl) : (cout << "false" << endl);
+  cout << str<< ": ";
+  sol.isunique3(str) ? (cout << "true" << endl) : (cout << "false" << endl);
   return 0;
 }
